@@ -1,0 +1,46 @@
+#pragma once
+#include <iostream>
+#include <muduo/net/TcpServer.h>
+
+namespace http
+{
+    class HttpContext
+    {
+    public:
+        enum HttpRequestParseState
+        {
+            ExpectRequestLine,//解析请求行
+            ExpectHeaders,//解析请求头
+            ExpectBody,//解析请求体
+            GotAll,//解析完成
+        };
+        HttpContext()
+        :state_(ExpectRequestLine)
+        {}
+
+        bool parasRequest(muduo::net::Buffer*,muduo::Timestamp receiveTime);
+        bool gotAll(){ return state_ == GotAll; }
+        void reset()
+        {
+            state_ = ExpectRequestLine;
+            HttpRequest dummyData;
+            request_.swap(dummyData);
+        }
+
+        const HttpRequest& request() const
+        { 
+            return request_; 
+        }
+
+        HttpRequest& request()
+        {
+            return request_;
+        }
+    private:
+        bool processRequestLine(cosnst char* start,const char* end);
+
+    private:
+        HttpRequestParseState state_;
+        HttpRequest request_;
+    };
+}
