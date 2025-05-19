@@ -4,3 +4,7 @@ HttpContext:对请求进行解析类
 HttpRequest:解析请求封装的信息类
 HttpResponse:返回给客户端类
 HttpServer:核心类 这里使用muduo库监听并发送处理后数据 通过路由来添加回调函数实现业务功能
+
+2024/5/19
+完成Router模块 包含类 router类
+Router支持精准路由匹配和动态路由匹配
