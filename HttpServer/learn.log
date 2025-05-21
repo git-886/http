@@ -5,6 +5,12 @@ HttpRequest:解析请求封装的信息类
 HttpResponse:返回给客户端类
 HttpServer:核心类 这里使用muduo库监听并发送处理后数据 通过路由来添加回调函数实现业务功能
 
-2024/5/19
+2025/5/19
 完成Router模块 包含类 router类
 Router支持精准路由匹配和动态路由匹配
+
+2025/5/21
+完成Session模块，包含Session类 SessionManager类 SessionStorage类
+Session类 具体的会话类
+SessionManager类 对Session进行管理 存储 删除等操作
+SessionStorage类 具体的对Session类进行存储的实现
